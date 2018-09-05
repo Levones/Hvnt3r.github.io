@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hvnt3r.github.io/"/>
-  <updated>2018-09-05T01:26:16.177Z</updated>
+  <updated>2018-09-05T03:23:34.856Z</updated>
   <id>https://hvnt3r.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客迁移说明</title>
+    <link href="https://hvnt3r.github.io/2018/09/%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%E8%AF%B4%E6%98%8E/"/>
+    <id>https://hvnt3r.github.io/2018/09/博客迁移说明/</id>
+    <published>2018-09-05T03:06:10.000Z</published>
+    <updated>2018-09-05T03:23:34.856Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="博客迁移说明"><a href="#博客迁移说明" class="headerlink" title="博客迁移说明"></a>博客迁移说明</h1><p>关于我写博客的历程，我最开始使用的是<code>CSDN</code>，优点是免费，易于维护，但是作为一个伪Geek，我还是很喜欢定制化的个性博客，于是我购买了一台腾讯云的主机用于搭建<code>WordPress</code>博客，在主题选择和插件的丰富上都做了不少的功夫，最终打造了一个页面美观大方功能齐全的个人博客，但是在日常使用过程中发现发布文章的过程十分繁琐而且没有一个良好的版本控制，什么时候博客崩了就什么都没有了，在这个知识就是金钱的时代我是必然要避免这种风险的，于是我选择了<code>Hexo+GithubPage</code>，静态的页面安全性高了很多，而且GitHubPage也是免费的，git也有版本控制，万一手贱点错了我还能找回之前的信息，所以选择了Hexo，目前这个站点上还没有很多的博客，不过我会慢慢的把存储在其他地方的博客迁移到这上面，敬请期待！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;博客迁移说明&quot;&gt;&lt;a href=&quot;#博客迁移说明&quot; class=&quot;headerlink&quot; title=&quot;博客迁移说明&quot;&gt;&lt;/a&gt;博客迁移说明&lt;/h1&gt;&lt;p&gt;关于我写博客的历程，我最开始使用的是&lt;code&gt;CSDN&lt;/code&gt;，优点是免费，易于维护，但是作为一个伪
+      
+    
+    </summary>
+    
+      <category term="生活" scheme="https://hvnt3r.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+      <category term="生活" scheme="https://hvnt3r.github.io/tags/%E7%94%9F%E6%B4%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>pwnable.kr_mistake</title>
