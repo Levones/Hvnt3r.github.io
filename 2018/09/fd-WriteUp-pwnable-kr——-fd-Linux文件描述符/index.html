@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Docker," />
+  <meta name="keywords" content="CTF,PWN," />
 
 
 
@@ -88,25 +88,22 @@
 
 
 
-<meta name="description" content="Ubuntu16.04安装配置Docker0x00因为要使用Docker进行一些web漏洞相关的实验，所以学习了下安装和使用Docker的方法，选用Ubuntu16的原因不必多说，性能稳定，各种第三方支持也比较完善，话不多说，开始动手！ 0x02首先，先进行更新1sudo apt-get update 因为通过curl方式安装可能会出现版本老旧的问题，所以我才用了pip安装的方式 1sudo ap">
-<meta name="keywords" content="Docker">
+<meta name="description" content="fd_WriteUp(pwnable.kr_fd详细解析)本题目来自：http://pwnable.kr/play.php  首先根据题目提示使用 1ssh fd@pwnable.kr -p2222 来连接到目标服务器，密码为guest  ls一下发现当前目录下有三个文件，一看到flag字样的文件名就下意识的cat flag但是发现没有读取权限，而除了flag文件外还有一个源码和一个可执行文件，显">
+<meta name="keywords" content="CTF,PWN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu16.04安装Docker">
-<meta property="og:url" content="https://hvnt3r.top/2018/09/Ubuntu16-04安装Docker/index.html">
+<meta property="og:title" content="fd_WriteUp(pwnable.kr_fd)Linux文件描述符">
+<meta property="og:url" content="https://hvnt3r.top/2018/09/fd-WriteUp-pwnable-kr——-fd-Linux文件描述符/index.html">
 <meta property="og:site_name" content="Hvnt3r&#39;s Blog">
-<meta property="og:description" content="Ubuntu16.04安装配置Docker0x00因为要使用Docker进行一些web漏洞相关的实验，所以学习了下安装和使用Docker的方法，选用Ubuntu16的原因不必多说，性能稳定，各种第三方支持也比较完善，话不多说，开始动手！ 0x02首先，先进行更新1sudo apt-get update 因为通过curl方式安装可能会出现版本老旧的问题，所以我才用了pip安装的方式 1sudo ap">
+<meta property="og:description" content="fd_WriteUp(pwnable.kr_fd详细解析)本题目来自：http://pwnable.kr/play.php  首先根据题目提示使用 1ssh fd@pwnable.kr -p2222 来连接到目标服务器，密码为guest  ls一下发现当前目录下有三个文件，一看到flag字样的文件名就下意识的cat flag但是发现没有读取权限，而除了flag文件外还有一个源码和一个可执行文件，显">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/28/C496yt.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/28/C49cOP.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/28/C49WTS.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/28/C49yQI.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/28/C49Rw8.png">
-<meta property="og:image" content="https://s1.ax1x.com/2018/05/28/C492ef.png">
-<meta property="og:updated_time" content="2018-09-06T00:35:22.770Z">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/13/PKn8Q1.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/13/PKn1zR.png">
+<meta property="og:image" content="https://s1.ax1x.com/2018/07/13/PKnGsx.png">
+<meta property="og:updated_time" content="2018-09-07T03:03:26.119Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu16.04安装Docker">
-<meta name="twitter:description" content="Ubuntu16.04安装配置Docker0x00因为要使用Docker进行一些web漏洞相关的实验，所以学习了下安装和使用Docker的方法，选用Ubuntu16的原因不必多说，性能稳定，各种第三方支持也比较完善，话不多说，开始动手！ 0x02首先，先进行更新1sudo apt-get update 因为通过curl方式安装可能会出现版本老旧的问题，所以我才用了pip安装的方式 1sudo ap">
-<meta name="twitter:image" content="https://s1.ax1x.com/2018/05/28/C496yt.png">
+<meta name="twitter:title" content="fd_WriteUp(pwnable.kr_fd)Linux文件描述符">
+<meta name="twitter:description" content="fd_WriteUp(pwnable.kr_fd详细解析)本题目来自：http://pwnable.kr/play.php  首先根据题目提示使用 1ssh fd@pwnable.kr -p2222 来连接到目标服务器，密码为guest  ls一下发现当前目录下有三个文件，一看到flag字样的文件名就下意识的cat flag但是发现没有读取权限，而除了flag文件外还有一个源码和一个可执行文件，显">
+<meta name="twitter:image" content="https://s1.ax1x.com/2018/07/13/PKn8Q1.png">
 
 
 
@@ -136,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="https://hvnt3r.top/2018/09/Ubuntu16-04安装Docker/"/>
+  <link rel="canonical" href="https://hvnt3r.top/2018/09/fd-WriteUp-pwnable-kr——-fd-Linux文件描述符/"/>
 
 
 
 
 
-  <title>Ubuntu16.04安装Docker | Hvnt3r's Blog</title>
+  <title>fd_WriteUp(pwnable.kr_fd)Linux文件描述符 | Hvnt3r's Blog</title>
   
 
 
@@ -261,7 +258,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hvnt3r.top/2018/09/Ubuntu16-04安装Docker/">
+    <link itemprop="mainEntityOfPage" href="https://hvnt3r.top/2018/09/fd-WriteUp-pwnable-kr——-fd-Linux文件描述符/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Hvnt3r">
@@ -278,7 +275,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Ubuntu16.04安装Docker</h2>
+          <h2 class="post-title" itemprop="name headline">fd_WriteUp(pwnable.kr_fd)Linux文件描述符</h2>
         
 
         <div class="post-meta">
@@ -290,8 +287,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-06T08:32:52+08:00">
-                2018-09-06
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-07T11:01:53+08:00">
+                2018-09-07
               </time>
             
 
@@ -313,8 +310,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Docker/" itemprop="url" rel="index">
-                    <span itemprop="name">Docker</span>
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
                   </a>
                 </span>
 
@@ -344,7 +341,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  222
+                  908
                 </span>
               
 
@@ -360,7 +357,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  1
+                  3
                 </span>
               
             </div>
@@ -381,16 +378,54 @@
       
 
       
-        <h1 id="Ubuntu16-04安装配置Docker"><a href="#Ubuntu16-04安装配置Docker" class="headerlink" title="Ubuntu16.04安装配置Docker"></a>Ubuntu16.04安装配置Docker</h1><h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><p>因为要使用Docker进行一些web漏洞相关的实验，所以学习了下安装和使用Docker的方法，选用Ubuntu16的原因不必多说，性能稳定，各种第三方支持也比较完善，话不多说，开始动手！</p>
-<h2 id="0x02"><a href="#0x02" class="headerlink" title="0x02"></a>0x02</h2><p>首先，先进行更新<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure></p>
-<p><a href="https://imgchr.com/i/C496yt" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2018/05/28/C496yt.png" alt="C496yt.png"></a><br>因为通过curl方式安装可能会出现版本老旧的问题，所以我才用了pip安装的方式</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python-pip</span><br></pre></td></tr></table></figure>
-<p><a href="https://imgchr.com/i/C49cOP" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2018/05/28/C49cOP.png" alt="C49cOP.png"></a><br>pip安装成功后，使用</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install docker-compose</span><br></pre></td></tr></table></figure>
-<p>来安装docker-compose<br><img src="https://s1.ax1x.com/2018/05/28/C49WTS.png" alt="C49WTS.png"><br>此时系统可能会提示pip版本低，于是按照系统提示进行pip的升级<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade pip</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://s1.ax1x.com/2018/05/28/C49yQI.png" alt="C49yQI.png"><br><a href="https://imgchr.com/i/C49Rw8" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2018/05/28/C49Rw8.png" alt="C49Rw8.png"></a><br>pip升级完成后安装docker.io<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install docker.io</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://s1.ax1x.com/2018/05/28/C492ef.png" alt="C492ef.png"><br>大功告成！<br>此时可使用docker info 命令来查看docker信息，但是由于系统权限限制，加上sudo才能正常查看</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker info</span><br></pre></td></tr></table></figure>
+        <h1 id="fd-WriteUp-pwnable-kr-fd详细解析"><a href="#fd-WriteUp-pwnable-kr-fd详细解析" class="headerlink" title="fd_WriteUp(pwnable.kr_fd详细解析)"></a>fd_WriteUp(pwnable.kr_fd详细解析)</h1><p>本题目来自：<a href="http://pwnable.kr/play.php" target="_blank" rel="noopener">http://pwnable.kr/play.php</a></p>
+<p><img src="https://s1.ax1x.com/2018/07/13/PKn8Q1.png" alt="PKn8Q1.png"></p>
+<p>首先根据题目提示使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh fd@pwnable.kr -p2222</span><br></pre></td></tr></table></figure>
+<p>来连接到目标服务器，密码为guest</p>
+<p><img src="https://s1.ax1x.com/2018/07/13/PKn1zR.png" alt="PKn1zR.png"></p>
+<p>ls一下发现当前目录下有三个文件，一看到flag字样的文件名就下意识的cat flag但是发现没有读取权限，而除了flag文件外还有一个源码和一个可执行文件，显然作者的意图是让玩家分析源代码再通过可执行文件读取flag里面的内容。</p>
+<p><img src="https://s1.ax1x.com/2018/07/13/PKnGsx.png" alt="PKnGsx.png"></p>
+<p>fd.c内容如下</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">char</span> buf[<span class="number">32</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[], <span class="keyword">char</span>* envp[])</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(argc&lt;<span class="number">2</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"pass argv[1] a number\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> fd = atoi( argv[<span class="number">1</span>] ) - <span class="number">0x1234</span>;</span><br><span class="line">	<span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">	len = read(fd, buf, <span class="number">32</span>);</span><br><span class="line">	<span class="keyword">if</span>(!<span class="built_in">strcmp</span>(<span class="string">"LETMEWIN\n"</span>, buf))&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"good job :)\n"</span>);</span><br><span class="line">		system(<span class="string">"/bin/cat flag"</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"learn about Linux file IO\n"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在我们来分析一下代码</p>
+<p>首先main函数使用了带参数的形式：<code>int main(int argc, char* argv[], char* envp[])</code></p>
+<p>argc: 参数的个数，不给main()函数传递参数时默认值为1，即至少有一个参数为该可执行文件的文件名（含目录）。</p>
+<p>argv: 为指针数组，分别指向各个字符串参数的首地址，其中argv[0]存储的是可执行文件的文件名的首地址 。</p>
+<p>envp:存放系统的环境变量 。</p>
+<p>假设有一个文件名为1.sh的文件中主函数声明为<code>int main(int argc , char* argv[] )</code>的形式，如果调用时使用<code>root@kali-linux:~# ./1.sh hahaha xixixi hehehe</code>的形式，则此时argc的值为4，argv[0]为“1.sh” ，argv[1]为“hahaha”，argv[2]为“xixixi”，argv[3]为“hehehe”   。</p>
+<p>那么这个代码块：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(argc&lt;<span class="number">2</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"pass argv[1] a number\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>表示的意思是运行fd的时候需要加参数。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> fd = atoi( argv[<span class="number">1</span>] ) - <span class="number">0x1234</span>;</span><br><span class="line"><span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">len = read(fd, buf, <span class="number">32</span>);</span><br><span class="line"><span class="keyword">if</span>(!<span class="built_in">strcmp</span>(<span class="string">"LETMEWIN\n"</span>, buf))&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"good job :)\n"</span>);</span><br><span class="line">	system(<span class="string">"/bin/cat flag"</span>);</span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码将argv[1]即第一个参数做了转整型的处理，使用的是atoi()函数：</p>
+<p><strong>int atoi(const char *str)</strong> 把参数 <strong>str</strong> 所指向的字符串转换为一个整数（类型为 int 型）</p>
+<p>而后面又使用<code>read(fd, buf, 32)</code>把fd（文件描述）所指的文件传送32个字节到buf所指的内存中，read()函数返回值为实际读取到的字节数, 如果返回0, 表示已到达文件尾或是无可读取的数据。若参数count 为0, 则read()不会有作用并返回0。</p>
+<p>关于文件描述符：</p>
+<table>
+<thead>
+<tr>
+<th>文件描述符的值</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>标准输入</td>
+</tr>
+<tr>
+<td>1</td>
+<td>标准输出</td>
+</tr>
+<tr>
+<td>2</td>
+<td>错误</td>
+</tr>
+</tbody>
+</table>
+<p><code>strcmp(&quot;LETMEWIN\n&quot;, buf)</code>将用户输入的字符串与“LETMEWIN”进行比较，如果一致则输出flag的内容，因此我们需要找到输入的点，因此本题的关键点在于通过控制argv[1] (第一个参数)来修改文件的描述符为0从而修改文件状态为标准输入，再输入“LETMEWIN”来得到flag，此时我们需要考虑如何时文件描述符为0，<code>int fd = atoi( argv[1] ) - 0x1234</code>文件描述符在程序中的变量名为fd(file descriptor),因此我们需要将<code>atoi( argv[1] ) - 0x1234</code>的值设为0,0x1234为16进制数，如果我们在参数输入时输入0x1234，atoi()函数会将0x1234中的x转为整型数字，因此数值会发生变化，此时应该使用进制转换将0x1234转换为十进制的4660再输入“LETMEWIN”即可获得flag。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fd@ubuntu:~$ ./fd 4660</span><br><span class="line">LETMEWIN</span><br><span class="line">good job :)</span><br><span class="line">mommy! I think I know what a file descriptor is!!</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -439,7 +474,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>Post link:</strong>
-    <a href="https://hvnt3r.top/2018/09/Ubuntu16-04安装Docker/" title="Ubuntu16.04安装Docker">https://hvnt3r.top/2018/09/Ubuntu16-04安装Docker/</a>
+    <a href="https://hvnt3r.top/2018/09/fd-WriteUp-pwnable-kr——-fd-Linux文件描述符/" title="fd_WriteUp(pwnable.kr_fd)Linux文件描述符">https://hvnt3r.top/2018/09/fd-WriteUp-pwnable-kr——-fd-Linux文件描述符/</a>
   </li>
   <li class="post-copyright-license">
     <strong>Copyright Notice: </strong>
@@ -454,7 +489,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+            <a href="/tags/CTF/" rel="tag"><i class="fa fa-tag"></i> CTF</a>
+          
+            <a href="/tags/PWN/" rel="tag"><i class="fa fa-tag"></i> PWN</a>
           
         </div>
       
@@ -467,8 +504,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/博客迁移说明/" rel="next" title="博客迁移说明">
-                <i class="fa fa-chevron-left"></i> 博客迁移说明
+              <a href="/2018/09/WordPress小于等于4-6-命令执行漏洞-PHPMailer-CVE-2016-10033-实验/" rel="next" title="WordPress小于等于4.6 命令执行漏洞(PHPMailer)(CVE-2016-10033)实验">
+                <i class="fa fa-chevron-left"></i> WordPress小于等于4.6 命令执行漏洞(PHPMailer)(CVE-2016-10033)实验
               </a>
             
           </div>
@@ -476,10 +513,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/WordPress小于等于4-6-命令执行漏洞-PHPMailer-CVE-2016-10033-实验/" rel="prev" title="WordPress小于等于4.6 命令执行漏洞(PHPMailer)(CVE-2016-10033)实验">
-                WordPress小于等于4.6 命令执行漏洞(PHPMailer)(CVE-2016-10033)实验 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -622,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Ubuntu16-04安装配置Docker"><span class="nav-number">1.</span> <span class="nav-text">Ubuntu16.04安装配置Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00"><span class="nav-number">1.1.</span> <span class="nav-text">0x00</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02"><span class="nav-number">1.2.</span> <span class="nav-text">0x02</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#fd-WriteUp-pwnable-kr-fd详细解析"><span class="nav-number">1.</span> <span class="nav-text">fd_WriteUp(pwnable.kr_fd详细解析)</span></a></li></ol></div>
             
 
           </div>
