@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hvnt3r.top/"/>
-  <updated>2018-09-08T08:44:57.211Z</updated>
+  <updated>2018-09-15T15:57:14.661Z</updated>
   <id>https://hvnt3r.top/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>WordPress一些配置问题</title>
+    <link href="https://hvnt3r.top/2018/09/%C2%96WordPress%E4%B8%80%E4%BA%9B%E9%85%8D%E7%BD%AE%E9%97%AE%E9%A2%98/"/>
+    <id>https://hvnt3r.top/2018/09/WordPress一些配置问题/</id>
+    <published>2018-09-15T15:55:59.000Z</published>
+    <updated>2018-09-15T15:57:14.661Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="WordPress一些配置问题"><a href="#WordPress一些配置问题" class="headerlink" title="WordPress一些配置问题"></a>WordPress一些配置问题</h1><h2 id="0x00"><a href="#0x00" class="headerlink" title="0x00"></a>0x00</h2><h3 id="WordPress的URL设置错误导致博客无法正常显示"><a href="#WordPress的URL设置错误导致博客无法正常显示" class="headerlink" title="WordPress的URL设置错误导致博客无法正常显示"></a>WordPress的URL设置错误导致博客无法正常显示</h3><p><strong>情景描述</strong></p><p>由于我的博客没有做正确的配置（在这里吐槽一下wordpress实在是太脆弱了，各种兼容性不友好），我的博客通过域名访问后会在地址栏变为我的服务器的IP地址，觉得这样十分不美观，于是就想自定义一下我的URL，百度之后发现这个可以直接在WP的设置中更改，但是我小手一抖，想改的URL还没打完就不小心按了回车键，结果博客立马就炸了，所有的资源链接都变成了我的那个不完整的链接，因此页面无法正常的完成加载，页面的响应速度也很慢，也无法正常登陆了，下面我来记录一下这个问题的解决办法。</p><p><strong>解决方法：</strong></p><p>这个问题需要修改数据库，首先用ssh连接上服务器，<code>cd</code>到WP的根目录</p><p>在终端内输入下列命令并输入密码</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure><p>登陆后切换数据库:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">USE wordpress;</span><br></pre></td></tr></table></figure><p>列举wp-content表单前5的数据：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from wp_options limit 5;</span><br></pre></td></tr></table></figure><p>修改数据库中的数据，将双引号内的域名换为自己的域名：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE wp_options SET option_value=&quot;http://www.xxxxx.com&quot; WHERE option_name=&quot;siteurl&quot;;</span><br></pre></td></tr></table></figure><p>至此修复完毕，刷新浏览器即可看到正常的页面。</p><h2 id="0x01"><a href="#0x01" class="headerlink" title="0x01"></a>0x01</h2><h3 id="WordPress配置SSL证书"><a href="#WordPress配置SSL证书" class="headerlink" title="WordPress配置SSL证书"></a>WordPress配置SSL证书</h3><p><strong>证书申请</strong></p><p>腾讯云有免费的SSL证书，我上去申请了一个</p><p><strong>安装方法：</strong></p><h4 id="1-1-获取证书"><a href="#1-1-获取证书" class="headerlink" title="1.1 获取证书"></a>1.1 获取证书</h4><p>Apache文件夹内获得证书文件 1_root_bundle.crt，2_<a href="http://www.domain.com_cert.crt" target="_blank" rel="noopener">www.domain.com_cert.crt</a> 和私钥文件 3_<a href="http://www.domain.com.key" target="_blank" rel="noopener">www.domain.com.key</a>,<br>1_root_bundle.crt 文件包括一段证书代码 “—–BEGIN CERTIFICATE—–”和“—–END CERTIFICATE—–”,<br>2_<a href="http://www.domain.com_cert.crt" target="_blank" rel="noopener">www.domain.com_cert.crt</a> 文件包括一段证书代码 “—–BEGIN CERTIFICATE—–”和“—–END CERTIFICATE—–”,<br>3_<a href="http://www.domain.com.key" target="_blank" rel="noopener">www.domain.com.key</a> 文件包括一段私钥代码“—–BEGIN RSA PRIVATE KEY—–”和“—–END RSA PRIVATE KEY—–”。</p><h4 id="1-2-证书安装"><a href="#1-2-证书安装" class="headerlink" title="1.2 证书安装"></a>1.2 证书安装</h4><p>编辑Apache根目录下 <code>/etc/apache2/sites-enabled/default-ssl.conf</code>文件:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost _default_:443&gt;</span><br><span class="line">    DocumentRoot &quot;/var/www/html&quot;</span><br><span class="line">    ServerName www.domain.com</span><br><span class="line">    SSLEngine on</span><br><span class="line">    SSLCertificateFile /usr/local/apache/conf/2_www.domain.com_cert.crt</span><br><span class="line">    SSLCertificateKeyFile /usr/local/apache/conf/3_www.domain.com.key</span><br><span class="line">    SSLCertificateChainFile /usr/local/apache/conf/1_root_bundle.crt</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure></p><p>大力出奇迹，我在寻找相关配置的选项的时候出了很多差错，导致网站一度拒绝连接，而且的我的腾讯云也没有一键备份还原的选项，搞崩了就得做好重装的准备，因此我强烈建议把你要修改的文件做一个备份，或者在修改时别直接在原选项上修改，而是注释掉官方的，自己手打一行，如果不行的话就把自己的删掉不影响原来的数据，我选择把源文件中所有的选项都注释掉，然后直接将上述代码粘贴到配置文件里，不容易出错，最后用<code>sudo service apsche2 restart</code>命令重启一下服务就能发现网站已经正确配置了ssl，但是wordpress可能在某些页面上仍然无法正确显示https，原因是要修改数据库里面的url，方法见文章上半部分，将http修改为https即可。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;WordPress一些配置问题&quot;&gt;&lt;a href=&quot;#WordPress一些配置问题&quot; class=&quot;headerlink&quot; title=&quot;WordPress一些配置问题&quot;&gt;&lt;/a&gt;WordPress一些配置问题&lt;/h1&gt;&lt;h2 id=&quot;0x00&quot;&gt;&lt;a href
+      
+    
+    </summary>
+    
+      <category term="日常挖坑" scheme="https://hvnt3r.top/categories/%E6%97%A5%E5%B8%B8%E6%8C%96%E5%9D%91/"/>
+    
+    
+      <category term="Wordpress" scheme="https://hvnt3r.top/tags/Wordpress/"/>
+    
+      <category term="PHP" scheme="https://hvnt3r.top/tags/PHP/"/>
+    
+  </entry>
   
   <entry>
     <title>Tomcat 远程代码执行漏洞 (CVE-2017-12615)</title>
