@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://hvnt3r.top/"/>
-  <updated>2018-09-15T15:59:49.929Z</updated>
+  <updated>2018-09-18T02:22:06.165Z</updated>
   <id>https://hvnt3r.top/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>将Kali Linux作为主力系统是一种怎样的体验</title>
+    <link href="https://hvnt3r.top/2018/09/%E5%B0%86Kali-Linux%E4%BD%9C%E4%B8%BA%E4%B8%BB%E5%8A%9B%E7%B3%BB%E7%BB%9F%E6%98%AF%E4%B8%80%E7%A7%8D%E6%80%8E%E6%A0%B7%E7%9A%84%E4%BD%93%E9%AA%8C/"/>
+    <id>https://hvnt3r.top/2018/09/将Kali-Linux作为主力系统是一种怎样的体验/</id>
+    <published>2018-09-18T02:20:53.000Z</published>
+    <updated>2018-09-18T02:22:06.165Z</updated>
+    
+    <content type="html"><![CDATA[<p>为了提高学习效率，我舍弃了在虚拟机里运行linux系统的方法，直接在笔记本上装了Kali Linux+Windows10双系统，使用的流畅度确实有了很大的提升，甚至用惯Linux后会嫌弃在Window下各种不合理的设定，确实在linux下使用一些软件或者配置环境要方便的多，由于系统是开源的，对系统进行个性化的定制也是十分方便的，bash命令也使我的工作效率有了极大的提升，但是Linux的稳定性确实十分差，在我心里有一个系统稳定性的排行榜：Macos&gt;Windows&gt;Linux，看来系统稳定性确实跟系统的封装性有一定的关系，在Windows下确实会经常碰到一些令人一头雾水的错误代码，Linux更是这样，在我安装双系统的时候，已经做好了经常折腾的心理准备，比如头一次对Kali安装显卡驱动，直接进不了系统，无奈只得重新安装系统，但是安装时却把grub给搞坏了，因此在我没有搞清楚grub的使用方法以及工作原理的时候，我都是在grub里面敲一些指令来开机的，浪费了很多的时间，后来将Kali装好之后，我一度沉迷在了Linux的世界中，喜欢上额这种简简洁明快的交互方式，虽然有一些win下常用的软件不能直接在linux上使用，但是可以通过wine这样的中间件来达成使用效果或者是在linux平台下寻找更合适的替代品，因此在很长一段时间内我都没有启动windows，除非是想玩游戏的时候，通常的情景是直接进入kali开始学习工作，偶尔打开在kali中安装的虚拟机来完成一些必须在win下完成的事情，这种情况持续了很长时间。因为kali2是rolling版本，所以系统需要频繁的更新，刚开始时我喜欢经常让系统保持在一个最新的状态，因此我没事的时候比如中午去吃饭就直接在终端内输入apt-update&amp;&amp;apt-upgrade使系统更新，偶尔的更新过程中会出现一些错误，比如更新完成后中文输入法无法正常工作等意外情况，或者是一些依赖的错误等等，我在这些由于更新而产生的错误上也填了很多的坑，花了时间也不少，因此我慢慢疲于做这样的工作，系统的错误为什么需要我花费大量的时间去修补，因此后来我就很久没有进行系统更新，直到今天，由于为了修复系统中可能出现的漏洞，我进行的系统更新，结果悲催了，更新过程中一直卡到了一个部分长达一个小时，更新总时间也要花去三个小时，卡在这里肯定是因为系统又出现了一些依赖的错误或者版本不匹配的情况，当我再次打开linux的时候，只见桌面一片黑暗，图标全无，docker也是空的，一些系统界面上的关键图标也消失不见，终端也无法打开，通过快捷键打开终端或者文件管理器的时候会自动注销，重新登陆后情况依旧。幸好我有很多的资料都保存在了云端，但是我长期的学习成果，有很多配置好的环境都得重新配置，因此十分不爽，我以后是绝对不会再把Linux作为主力系统来使用了，由于硬盘空间有限，也没有做全盘的备份，kali也没有自己的系统备份方案，而且系统的稳定性本来就差，三天两头出小毛病，真的是心累，或许linux还是更适合活在虚拟机里，备份的时候直接做一个快照，这样就能省去很多维护的时间。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;为了提高学习效率，我舍弃了在虚拟机里运行linux系统的方法，直接在笔记本上装了Kali Linux+Windows10双系统，使用的流畅度确实有了很大的提升，甚至用惯Linux后会嫌弃在Window下各种不合理的设定，确实在linux下使用一些软件或者配置环境要方便的多，
+      
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://hvnt3r.top/categories/Linux/"/>
+    
+    
+      <category term="Kali Linux" scheme="https://hvnt3r.top/tags/Kali-Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>Python将base64转为文档或者图片</title>
@@ -143,11 +168,11 @@
       <category term="WEB安全" scheme="https://hvnt3r.top/categories/WEB%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="CVE" scheme="https://hvnt3r.top/tags/CVE/"/>
-    
       <category term="Wordpress" scheme="https://hvnt3r.top/tags/Wordpress/"/>
     
       <category term="PHP" scheme="https://hvnt3r.top/tags/PHP/"/>
+    
+      <category term="CVE" scheme="https://hvnt3r.top/tags/CVE/"/>
     
   </entry>
   
