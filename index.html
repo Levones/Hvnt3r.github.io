@@ -271,6 +271,190 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hvnt3r.top/2018/09/col-WriteUp-panable-kr-col-hash碰撞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Hvnt3r">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hvnt3r's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/col-WriteUp-panable-kr-col-hash碰撞/" itemprop="url">col_WriteUp(panable.kr_col)hash碰撞</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-18T10:36:59+08:00">
+                2018-09-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  528
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="col-WriteUp-panable-kr-col"><a href="#col-WriteUp-panable-kr-col" class="headerlink" title="col_WriteUp(panable.kr_col)"></a>col_WriteUp(panable.kr_col)</h1><p>题目传送门：<a href="http://pwnable.kr/play.php" target="_blank" rel="noopener">http://pwnable.kr/play.php</a></p>
+<p><img src="https://s1.ax1x.com/2018/07/13/PK82GT.png" alt="PK82GT.png"></p>
+<p>ssh连接目标服务器得到三个文件，查看col.c内容如下：</p>
+<p><img src="https://s1.ax1x.com/2018/07/13/PK8giV.png" alt="PK8giV.png"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> hashcode = <span class="number">0x21DD09EC</span>;</span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="title">check_password</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span>* ip = (<span class="keyword">int</span>*)p;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++)&#123;</span><br><span class="line">		res += ip[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(argc&lt;<span class="number">2</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"usage : %s [passcode]\n"</span>, argv[<span class="number">0</span>]);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">strlen</span>(argv[<span class="number">1</span>]) != <span class="number">20</span>)&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"passcode length should be 20 bytes\n"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(hashcode == check_password( argv[<span class="number">1</span>] ))&#123;</span><br><span class="line">		system(<span class="string">"/bin/cat flag"</span>);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"wrong passcode.\n"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这道题的考点是hash碰撞，但是这个hash并非真的hash函数加密的hash，而是出题人指定的hash值：0x21DD09EC</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="title">check_password</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span>* ip = (<span class="keyword">int</span>*)p;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">5</span>; i++)&#123;</span><br><span class="line">		res += ip[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此函数将用户输入的20个字节的数据作为5个字符串的值相加，最后在<code>if(hashcode == check_password( argv[1] ))</code>中与hash值对比，如果值相等则执行system(“/bin/cat flag”)输出flag，因此我们需要将输入的5个数相加的值为0x21DD09EC，因此可以将输入的20个字节的前16个字节输入为“\x00”，这里有必要提一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">col@ubuntu:~$ file col</span><br><span class="line">col: setuid ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, <span class="keyword">for</span> GNU/Linux 2.6.24, BuildID[sha1]=05a10e253161f02d8e6553d95018bc82c7b531fe, not stripped</span><br></pre></td></tr></table></figure>
+<p>本程序是x86程序，在内存中采用小端序，输入的顺序和在内存中存储的顺序是相反的，例如我们想存储\x00\x01则我们要输入\x01\x00，而没四个字节为一组，因此我们要想这5个数相加的值为0x21DD09EC我们可以输入4个”\x00\x00\x00\x00”+”\xEC\x09\xDD\21”,但是由于“0x09”有特殊含义，是一个坏字符（badchar），因此需要避开这个数字，我们可以构造4个”\x01\x01\x01\x01”和一个”\xE8\x05\xD9\x1D”</p>
+<p><code>0x1DD905E8=0x21DD09EC-0x01010101-0x01010110-0x01010101-0x01010101</code></p>
+<p>运行程序输入./col `python -c “print ‘\x01’ * 16 + ‘\xE8\x05\xD9\x1D’”`即可获取flag：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">col@ubuntu:~$ ./col `python -c <span class="string">"print '\x01' * 16 + '\xE8\x05\xD9\x1D'"</span>`</span><br><span class="line">daddy! I just managed to create a <span class="built_in">hash</span> collision :)</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hvnt3r.top/2018/09/PHP文件上传漏洞原理以及防御姿势/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2000,193 +2184,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hvnt3r.top/2018/09/pwnable-kr-mistake/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Hvnt3r">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hvnt3r's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/pwnable-kr-mistake/" itemprop="url">pwnable.kr_mistake</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-04T23:56:50+08:00">
-                2018-09-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  538
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="pwnable-kr-mistake"><a href="#pwnable-kr-mistake" class="headerlink" title="pwnable.kr_mistake"></a>pwnable.kr_mistake</h1><p><strong>题面：</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">We all make mistakes, let&apos;s move on.</span><br><span class="line">(don&apos;t take this too seriously, no fancy hacking skill is required at all)</span><br><span class="line"></span><br><span class="line">This task is based on real event</span><br><span class="line">Thanks to dhmonkey</span><br><span class="line"></span><br><span class="line">hint : operator priority</span><br><span class="line"></span><br><span class="line">ssh mistake@pwnable.kr -p2222 (pw:guest)</span><br></pre></td></tr></table></figure>
-<p>提示这道题的要点是运算符的优先级</p>
-<p>连上服务器后发现题目文件夹下有四个文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mistake@ubuntu:~$ ls -l</span><br><span class="line">total 24</span><br><span class="line">-r-------- 1 mistake_pwn root      51 Jul 29  2014 flag</span><br><span class="line">-r-sr-x--- 1 mistake_pwn mistake 8934 Aug  1  2014 mistake</span><br><span class="line">-rw-r--r-- 1 root        root     792 Aug  1  2014 mistake.c</span><br><span class="line">-r-------- 1 mistake_pwn root      10 Jul 29  2014 password</span><br></pre></td></tr></table></figure>
-<p>查看一下<code>mistake.c</code></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;                                               </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;fcntl.h&gt;                                               </span></span></span><br><span class="line">                                                                 </span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PW_LEN 10                                                </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> XORKEY 1                                                 </span></span><br><span class="line">                                                                 </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">xor</span><span class="params">(<span class="keyword">char</span>* s, <span class="keyword">int</span> len)</span></span>&#123;                                      </span><br><span class="line">        <span class="keyword">int</span> i;                                                   </span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;len; i++)&#123;                                    </span><br><span class="line">                s[i] ^= XORKEY;                                  </span><br><span class="line">        &#125;                                                        </span><br><span class="line">&#125;                                                                </span><br><span class="line">                                                                 </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span></span>&#123;                                </span><br><span class="line">                                                                 </span><br><span class="line">        <span class="keyword">int</span> fd;                                                  </span><br><span class="line">        <span class="keyword">if</span>(fd=open(<span class="string">"/home/mistake/password"</span>,O_RDONLY,<span class="number">0400</span>) &lt; <span class="number">0</span>)&#123; </span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"can't open password %d\n"</span>, fd);          </span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;                                        </span><br><span class="line">        &#125;                                                        </span><br><span class="line">                                                                 </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"do not bruteforce...\n"</span>);                        </span><br><span class="line">        sleep(time(<span class="number">0</span>)%<span class="number">20</span>);                                       </span><br><span class="line">                                                                 </span><br><span class="line">        <span class="keyword">char</span> pw_buf[PW_LEN+<span class="number">1</span>];                                   </span><br><span class="line">        <span class="keyword">int</span> len;                                                 </span><br><span class="line">        <span class="keyword">if</span>(!(len=read(fd,pw_buf,PW_LEN) &gt; <span class="number">0</span>))&#123;                   </span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"read error\n"</span>);                          </span><br><span class="line">                close(fd);                                       </span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;                                        </span><br><span class="line">        &#125;                                                        </span><br><span class="line">                                                                 </span><br><span class="line">        <span class="keyword">char</span> pw_buf2[PW_LEN+<span class="number">1</span>];                                  </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"input password : "</span>);                             </span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%10s"</span>, pw_buf2);                                  </span><br><span class="line">                                                                 </span><br><span class="line">        <span class="comment">// xor your input                                        </span></span><br><span class="line">        xor(pw_buf2, <span class="number">10</span>);                                        </span><br><span class="line">                                                                 </span><br><span class="line">        <span class="keyword">if</span>(!<span class="built_in">strncmp</span>(pw_buf, pw_buf2, PW_LEN))&#123;                   </span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Password OK\n"</span>);                         </span><br><span class="line">                system(<span class="string">"/bin/cat flag\n"</span>);                       </span><br><span class="line">        &#125;                                                        </span><br><span class="line">        <span class="keyword">else</span>&#123;                                                    </span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"Wrong Password\n"</span>);                      </span><br><span class="line">        &#125;                                                        </span><br><span class="line">                                                                 </span><br><span class="line">        close(fd);                                               </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;                                                </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>根据题目的提示<code>运算符</code>我找一些代码中的关键点</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(fd=open(<span class="string">"/home/mistake/password"</span>,O_RDONLY,<span class="number">0400</span>) &lt; <span class="number">0</span>)&#123; </span><br><span class="line">               <span class="built_in">printf</span>(<span class="string">"can't open password %d\n"</span>, fd);          </span><br><span class="line">               <span class="keyword">return</span> <span class="number">0</span>;                                        </span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-<p>在这里由于<code>open()</code>的返回值不会小于0，且<code>&lt;</code>的优先级比<code>=</code>高，所以这句语句的结果是open()的返回值!&lt;0，所以<code>open(&quot;/home/mistake/password&quot;,O_RDONLY,0400) &lt; 0</code>的值为false，因此赋值给fd的时候fd为0，此平台的第一题就是考察的<code>File descriptor</code>，当值为0时执行标准输入，因此实际上代码并不会读password文件，而是等待用户的输入，这就可以让我们来伪造password</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">xor(pw_buf2, <span class="number">10</span>);                                        </span><br><span class="line">      <span class="comment">//对用户的输入xor                                                         </span></span><br><span class="line">      <span class="keyword">if</span>(!<span class="built_in">strncmp</span>(pw_buf, pw_buf2, PW_LEN))&#123;     <span class="comment">//比较xor后的密码与“原”密码              </span></span><br><span class="line">              <span class="built_in">printf</span>(<span class="string">"Password OK\n"</span>);                         </span><br><span class="line">              system(<span class="string">"/bin/cat flag\n"</span>);                       </span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-<p>因此我们只需要再fd赋值之后输入自己的10位密码，然后再输入xor后的密码，即可比对成功拿到flag</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mistake@ubuntu:~$ ./mistake</span><br><span class="line"><span class="keyword">do</span> not bruteforce...</span><br><span class="line">1111111111</span><br><span class="line">input password : 0000000000</span><br><span class="line">Password OK</span><br><span class="line">Mommy, the operator priority always confuses me :(</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -2234,7 +2238,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2331,7 +2335,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">8.2k</span>
+    <span title="Site words total count">8.7k</span>
   
 </div>
 
